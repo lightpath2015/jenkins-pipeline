@@ -1,10 +1,10 @@
 pipeline {
 	environment {
-		registry = "lightpath2015/jenkins-docker-test"
+		registry = "swtest/jenkins-docker-test"
 		DOCKER_PWD = credentials('docker-login-pwd')
 	}
 	agent {
-		image 'lightpath2015/node-docker'
+		image 'swtest/node-docker'
 		args '-p 3000:3000'
 		args '-w /app'
 		args '-v /var/run/docker.sock:/var/run/docker.sock'
@@ -27,7 +27,7 @@ stages {
 	stage("Build & Push Docker image") {
 		steps {
 			sh 'docker image build -t $registry:$BUILD_NUMBER.'
-			sh 'docker login -u lightpath2015 -p $DOCKER_PWD'
+			sh 'docker login -u swtest -p $DOCKER_PWD'
 			sh 'docker image push $registry:$BUILD_NUMBER'
 			sh "docker image rm $registry:$BUILD_NUMBER"
 		}

@@ -24,7 +24,7 @@ EOF
 sudo docker container run --rm --net test-net node:12.10-alpine sh -c "$wait_for"
 
 echo "Smoke tests..."
-sudo docker container run --name tester --rm --net test-net lightpath2015/node-docker sh -c "curl api:3000"
+sudo docker container run --name tester --rm --net test-net swtest/node-docker sh -c "curl api:3000"
 
 
 
